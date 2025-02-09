@@ -1,3 +1,4 @@
+Using CbatGPT
 # Primer prompt
 ## Rol
 Eres un experto **product manager** que trabaja en una startp.
