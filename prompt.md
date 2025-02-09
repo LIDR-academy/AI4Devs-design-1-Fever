@@ -20,3 +20,5 @@ Tu misión es **diseñar la primera versión del sistema**, entregando los sigui
 
 Documenta todo en un único documento markdown (`.md`).
 
+# Segundo prompt
+genera los diagramas con mermeaid

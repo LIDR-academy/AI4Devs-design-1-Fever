@@ -35,21 +35,42 @@
 3. LTI publica automáticamente en portales.
 4. Recibe métricas sobre visualizaciones y postulaciones.
 
-📍 **Diagrama**: [Se añadirá]
+📍 **Diagrama**:
+```mermaid
+graph TD;
+    A[HR crea oferta] --> B[Selecciona canales];
+    B --> C[LTI publica en portales];
+    C --> D[Recibe métricas];
+```
+
 
 ### **Caso de Uso 2: Evaluación y Entrevista de Candidatos**
 1. LTI filtra candidatos por criterios.
 2. Envía pruebas online automáticamente.
 3. Programación automática de entrevistas.
 
-📍 **Diagrama**: [Se añadirá]
+📍 **Diagrama**:
+```mermaid
+graph TD;
+    A[HR crea oferta] --> B[Selecciona canales];
+    B --> C[LTI publica en portales];
+    C --> D[Recibe métricas];
+```
+
 
 ### **Caso de Uso 3: Contratación y Onboarding**
 1. HR selecciona candidato final.
 2. Se envía oferta de trabajo digitalmente.
 3. Generación de documentos y firma electrónica.
 
-📍 **Diagrama**: [Se añadirá]
+📍 **Diagrama**:
+```mermaid
+graph TD;
+    A[HR crea oferta] --> B[Selecciona canales];
+    B --> C[LTI publica en portales];
+    C --> D[Recibe métricas];
+```
+
 
 ## 3️⃣ Modelo de Datos
 
@@ -60,7 +81,15 @@
 | **Aplicación** | ID, CandidatoID, OfertaID, Estado |
 | **Entrevista** | ID, CandidatoID, Fecha, Entrevistador |
 
-📍 **Diagrama Relacional**: [Se añadirá]
+📍 **Diagrama Relacional**:
+```mermaid
+erDiagram
+    CANDIDATO ||--o{ APLICACION : tiene
+    OFERTA ||--o{ APLICACION : contiene
+    CANDIDATO ||--o{ ENTREVISTA : asiste
+    ENTREVISTA }o--|| ENTREVISTADOR : realizada_por
+```
+
 
 ## 4️⃣ Diseño del Sistema a Alto Nivel
 LTI se estructura en **módulos independientes**, con una arquitectura orientada a microservicios:
@@ -70,7 +99,17 @@ LTI se estructura en **módulos independientes**, con una arquitectura orientada
 - **Módulo de IA**: Procesamiento de CVs y ranking de candidatos.
 - **Integraciones**: Conexión con plataformas de empleo y calendarios.
 
-📍 **Diagrama de Arquitectura**: [Se añadirá]
+📍 **Diagrama de Arquitectura**:
+```mermaid
+graph LR;
+    A[Frontend] -->|Solicita datos| B[API Backend];
+    B -->|Procesa y responde| A;
+    B --> C[Modulo de IA];
+    C -->|Evalúa y retorna datos| B;
+    B --> D[Base de Datos];
+    B --> E[Integraciones];
+```
+
 
 ## 5️⃣ Diagrama C4: Componente Clave (Procesamiento de Candidatos)
 
@@ -79,5 +118,12 @@ El módulo de procesamiento de candidatos incluye:
 2. **Análisis semántico y ranking de compatibilidad**.
 3. **Envío automático de notificaciones y pruebas**.
 
-📍 **Diagrama C4**: [Se añadirá]
+📍 **Diagrama C4**:
+```mermaid
+graph TD;
+    A[Extracción de CV] --> B[Análisis semántico];
+    B --> C[Ranking de compatibilidad];
+    C --> D[Notificaciones automáticas];
+```
+
 
