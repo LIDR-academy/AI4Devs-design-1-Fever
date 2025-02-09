@@ -45,7 +45,7 @@ LTI es un **sistema avanzado de seguimiento de candidatos (ATS)** diseñado para
 3. Se publica automáticamente en múltiples plataformas de empleo.
 4. Se envían notificaciones a candidatos en la base de datos interna.
 
-![Caso de Uso 1](./caso_uso_1.png)
+![Caso de Uso 1](mnt/data/caso_uso_1.png)
 
 ### **Caso de Uso 2: Evaluación y Selección de Candidatos**
 **Actores:** Reclutador, Manager
@@ -55,7 +55,7 @@ LTI es un **sistema avanzado de seguimiento de candidatos (ATS)** diseñado para
 3. El reclutador revisa y selecciona finalistas.
 4. El manager recibe notificación para aprobación.
 
-![Caso de Uso 2](./caso_uso_2.png)
+![Caso de Uso 2](mnt/data/caso_uso_2.png)
 
 ### **Caso de Uso 3: Coordinación de Entrevistas y Feedback**
 **Actores:** Reclutador, Candidato, Manager
@@ -65,17 +65,62 @@ LTI es un **sistema avanzado de seguimiento de candidatos (ATS)** diseñado para
 3. Tras la entrevista, el manager califica al candidato dentro de LTI.
 4. Se genera un informe con recomendaciones finales.
 
-![Caso de Uso 3](./caso_uso_3.png)
+![Caso de Uso 3](mnt/data/caso_uso_3.png)
 
-## 3. Modelo de Datos
+## 3. Modelo de Datos Mejorado
 
-### **Entidades Principales**
-1. **Candidato** (ID, nombre, email, teléfono, experiencia, skills, currículum)
-2. **Oferta de Trabajo** (ID, título, descripción, requisitos, empresa, estado)
-3. **Aplicación** (ID, candidato_ID, oferta_ID, estado, fecha_aplicación)
-4. **Entrevista** (ID, candidato_ID, reclutador_ID, fecha, resultado)
-5. **Empresa** (ID, nombre, sector, empleados)
+### **Entidades Principales y sus Atributos**
+1. **Candidato**
+    - ID (UUID)
+    - Nombre (String)
+    - Email (String)
+    - Teléfono (String)
+    - Experiencia (Texto)
+    - Skills (Array[String])
+    - Currículum (Blob)
+    - Estado del proceso (Enum: Aplicado, Entrevistado, Contratado, Rechazado)
+
+2. **Oferta de Trabajo**
+    - ID (UUID)
+    - Título (String)
+    - Descripción (Texto)
+    - Requisitos (Texto)
+    - Empresa (UUID, Relación con Empresa)
+    - Estado (Enum: Abierta, Cerrada, En Proceso)
+
+3. **Aplicación**
+    - ID (UUID)
+    - Candidato_ID (UUID, Relación con Candidato)
+    - Oferta_ID (UUID, Relación con Oferta de Trabajo)
+    - Estado (Enum: Recibida, En revisión, Rechazada, Aprobada)
+    - Fecha_aplicación (DateTime)
+
+4. **Entrevista**
+    - ID (UUID)
+    - Candidato_ID (UUID, Relación con Candidato)
+    - Reclutador_ID (UUID, Relación con Usuario)
+    - Fecha (DateTime)
+    - Resultado (Texto)
 
 ## 4. Diseño del Sistema a Alto Nivel
-LTI se compone de
+LTI se compone de los siguientes módulos:
+- **Módulo de Gestión de Candidatos**: Base de datos de perfiles con filtros inteligentes.
+- **Módulo de Publicación de Ofertas**: Creación y distribución automática de vacantes.
+- **Módulo de Selección y Priorización**: IA para match entre candidatos y puestos.
+- **Módulo de Entrevistas y Evaluaciones**: Agendamiento y feedback de entrevistas.
+- **Módulo de Reporting y Métricas**: Análisis de desempeño del proceso de contratación.
+
+![Diagrama de Arquitectura](mnt/data/arquitectura_lti.png)
+
+## 5. Diagrama C4 - Módulo de IA para Selección
+El módulo de selección utiliza un motor de IA para evaluar candidatos basándose en criterios de la empresa y aprendizaje automático. Este componente interactúa con:
+- **Base de datos de candidatos**: Extrae información de perfiles.
+- **Historial de contrataciones**: Aprende de decisiones previas.
+- **Sistema de evaluación de entrevistas**: Recoge feedback sobre desempeño.
+
+![Diagrama C4](mnt/data/diagrama_c4.png)
+
+---
+
+Este documento es la base inicial para el desarrollo de LTI. Podemos iterar sobre cada módulo y definir más en detalle las funciones críticas a medida que avancemos.
 

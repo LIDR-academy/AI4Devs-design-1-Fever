@@ -22,3 +22,9 @@ Documenta todo en un único documento markdown (`.md`).
 
 # Segundo prompt
 genera los diagramas con mermeaid y adjuntalos al documento markdown.
+
+# Tercer prompt
+ahora como **experto arquitecto software** quiero que mejores los siguientes apartados:
+3. **Modelo de datos** que cubra entidades, atributos (nombre y tipo) y relaciones.
+4. **Diseño del sistema a alto nivel**, tanto explicado como diagrama adjunto.
+5. **Diagrama C4** que llegue en profundidad a uno de los componentes del sistema, el que prefieras.
