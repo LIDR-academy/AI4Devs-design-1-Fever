@@ -42,3 +42,22 @@ quiero que añadas diagramas hechos en mermaid para los apartados 2, 3, 4 y 5
 
 # Quinto prompt
 en el apartado 2, añade un diagrama de caso de uso por cada uno de los casos de uso que aparecen ese apartado
+
+# Sexto prompt
+necesito que en el apartado 5 añadas 4 diagramas hecho en mermaid, uno por cada nivel de abstracción
+
+*En este punto ChatGPT me dice que lo ha añadido pero no es así.
+Lo intento varias veces pero sigue sin añadir los diagramas al documento.
+Así que se me ocurre pedirle que me de la información en la conversación.
+
+``
+no puedo verlos en el documento, podrías escribirlos en esta conversación?
+``
+
+Ahora si que me devuelve los diagramas que quiero y posteriormente le pido que los añada al apartado 5.
+
+``
+añade esta información al apartado 5 del documento
+``
+
+Así consigo que funcione.
