@@ -29,3 +29,12 @@ ahora como **experto arquitecto software** quiero que mejores los siguientes apa
 3. **Modelo de datos** que cubra entidades, atributos (nombre y tipo) y relaciones.
 4. **Diseño del sistema a alto nivel**, tanto explicado como diagrama adjunto.
 5. **Diagrama C4** que llegue en profundidad a uno de los componentes del sistema, el que prefieras.
+
+# Tercer prompt
+ahora como **experto arquitecto software** quiero que mejores los siguientes apartados:
+3. **Modelo de datos** que cubra entidades, atributos (nombre y tipo) y relaciones.
+4. **Diseño del sistema a alto nivel**, tanto explicado como diagrama adjunto.
+5. **Diagrama C4** que llegue en profundidad a uno de los componentes del sistema, el que prefieras.
+
+# Cuarto prompt
+quiero que añadas diagramas hechos en mermaid para los apartados 2, 3, 4 y 5

@@ -37,88 +37,94 @@ LTI es un **sistema avanzado de seguimiento de candidatos (ATS)** diseñado para
 
 ## 2. Casos de Uso Principales
 
-### **Caso de Uso 1: Publicación de una Oferta de Trabajo**
-**Actores:** Reclutador
-**Flujo:**
-1. El reclutador crea una nueva oferta en LTI.
-2. La IA sugiere mejoras en la descripción del puesto.
-3. Se publica automáticamente en múltiples plataformas de empleo.
-4. Se envían notificaciones a candidatos en la base de datos interna.
+Los casos de uso representan los principales procesos que facilita LTI:
 
-![Caso de Uso 1](mnt/data/caso_uso_1.png)
+- **Publicación de una oferta de trabajo:** Desde la creación hasta la publicación automática y notificación a candidatos.
+- **Evaluación y selección de candidatos:** Filtros avanzados, IA para priorización y gestión de aprobaciones.
+- **Coordinación de entrevistas y feedback:** Automatización del agendamiento y evaluación de candidatos.
 
-### **Caso de Uso 2: Evaluación y Selección de Candidatos**
-**Actores:** Reclutador, Manager
-**Flujo:**
-1. Candidatos aplican a la oferta.
-2. La IA prioriza y sugiere los mejores perfiles.
-3. El reclutador revisa y selecciona finalistas.
-4. El manager recibe notificación para aprobación.
-
-![Caso de Uso 2](mnt/data/caso_uso_2.png)
-
-### **Caso de Uso 3: Coordinación de Entrevistas y Feedback**
-**Actores:** Reclutador, Candidato, Manager
-**Flujo:**
-1. Se agenda automáticamente una entrevista con disponibilidad sincronizada.
-2. El candidato recibe una invitación con videollamada integrada.
-3. Tras la entrevista, el manager califica al candidato dentro de LTI.
-4. Se genera un informe con recomendaciones finales.
-
-![Caso de Uso 3](mnt/data/caso_uso_3.png)
+```mermaid
+graph TD;
+    A[Reclutador] -->|Crea oferta| B[Publicación de Oferta]
+    B -->|Revisión IA| C[Optimización Descripción]
+    B -->|Publicación automática| D[Plataformas de Empleo]
+    D -->|Notificación| E[Candidatos]
+```
 
 ## 3. Modelo de Datos Mejorado
 
-### **Entidades Principales y sus Atributos**
-1. **Candidato**
-    - ID (UUID)
-    - Nombre (String)
-    - Email (String)
-    - Teléfono (String)
-    - Experiencia (Texto)
-    - Skills (Array[String])
-    - Currículum (Blob)
-    - Estado del proceso (Enum: Aplicado, Entrevistado, Contratado, Rechazado)
+LTI utiliza un modelo de datos relacional donde las principales entidades están interconectadas para facilitar un flujo de información eficiente.
 
-2. **Oferta de Trabajo**
-    - ID (UUID)
-    - Título (String)
-    - Descripción (Texto)
-    - Requisitos (Texto)
-    - Empresa (UUID, Relación con Empresa)
-    - Estado (Enum: Abierta, Cerrada, En Proceso)
-
-3. **Aplicación**
-    - ID (UUID)
-    - Candidato_ID (UUID, Relación con Candidato)
-    - Oferta_ID (UUID, Relación con Oferta de Trabajo)
-    - Estado (Enum: Recibida, En revisión, Rechazada, Aprobada)
-    - Fecha_aplicación (DateTime)
-
-4. **Entrevista**
-    - ID (UUID)
-    - Candidato_ID (UUID, Relación con Candidato)
-    - Reclutador_ID (UUID, Relación con Usuario)
-    - Fecha (DateTime)
-    - Resultado (Texto)
+```mermaid
+classDiagram
+    class Candidato {
+        UUID ID
+        String Nombre
+        String Email
+        String Teléfono
+        Texto Experiencia
+        Array[String] Skills
+        Blob Currículum
+        Enum EstadoProceso
+    }
+    class OfertaTrabajo {
+        UUID ID
+        String Título
+        Texto Descripción
+        Texto Requisitos
+        UUID Empresa
+        Enum Estado
+    }
+    class Aplicación {
+        UUID ID
+        UUID Candidato_ID
+        UUID Oferta_ID
+        Enum Estado
+        DateTime Fecha_aplicación
+    }
+    class Entrevista {
+        UUID ID
+        UUID Candidato_ID
+        UUID Reclutador_ID
+        DateTime Fecha
+        Texto Resultado
+    }
+    Candidato "1" -- "*" Aplicación
+    OfertaTrabajo "1" -- "*" Aplicación
+    Candidato "1" -- "*" Entrevista
+    Reclutador "1" -- "*" Entrevista
+```
 
 ## 4. Diseño del Sistema a Alto Nivel
-LTI se compone de los siguientes módulos:
-- **Módulo de Gestión de Candidatos**: Base de datos de perfiles con filtros inteligentes.
-- **Módulo de Publicación de Ofertas**: Creación y distribución automática de vacantes.
-- **Módulo de Selección y Priorización**: IA para match entre candidatos y puestos.
-- **Módulo de Entrevistas y Evaluaciones**: Agendamiento y feedback de entrevistas.
-- **Módulo de Reporting y Métricas**: Análisis de desempeño del proceso de contratación.
 
-![Diagrama de Arquitectura](mnt/data/arquitectura_lti.png)
+El sistema se compone de los siguientes módulos clave:
+
+- **Frontend:** Interfaz de usuario para reclutadores, candidatos y managers.
+- **Backend:** Gestión de la lógica de negocio y flujos de contratación.
+- **Base de Datos:** Almacenamiento estructurado de candidatos, ofertas y procesos.
+- **Motor de IA:** Análisis y recomendaciones basadas en machine learning.
+- **Integraciones Externas:** Conexiones con LinkedIn, ERP y plataformas de empleo.
+
+```mermaid
+graph TD;
+    A[Frontend] -->|REST API| B[Backend]
+    B -->|Consulta| C[Base de Datos]
+    B -->|Procesamiento| D[Motor de IA]
+    B -->|Integración| E[Servicios Externos]
+    C -->|Almacena| F[Historial de Contrataciones]
+```
 
 ## 5. Diagrama C4 - Módulo de IA para Selección
-El módulo de selección utiliza un motor de IA para evaluar candidatos basándose en criterios de la empresa y aprendizaje automático. Este componente interactúa con:
-- **Base de datos de candidatos**: Extrae información de perfiles.
-- **Historial de contrataciones**: Aprende de decisiones previas.
-- **Sistema de evaluación de entrevistas**: Recoge feedback sobre desempeño.
 
-![Diagrama C4](mnt/data/diagrama_c4.png)
+El motor de IA se encarga de analizar y recomendar los candidatos más adecuados, basándose en datos históricos y criterios definidos por los reclutadores.
+
+```mermaid
+graph TD;
+    A[Base de Datos de Candidatos] -->|Proporciona datos| B[Motor de IA]
+    B -->|Analiza| C[Historial de Contrataciones]
+    B -->|Genera Recomendaciones| D[Lista de Prioridad]
+    D -->|Envia a| E[Reclutador]
+```
 
 ---
 
