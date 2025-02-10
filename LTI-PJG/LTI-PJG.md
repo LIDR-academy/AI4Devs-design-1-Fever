@@ -19,6 +19,20 @@ LTI es un **sistema avanzado de seguimiento de candidatos (ATS)** diseñado para
 6. **Reporting y métricas**: Análisis del embudo de contratación y optimización del proceso.
 
 ### **Lean Canvas**
+
+```mermaid
+graph TD;
+    A[Problema] -->|Ineficiencia en contratación| B[Solución]
+    A -->|Falta de datos efectivos| B
+    A -->|Dificultad colaboración| B
+    B[Solución] -->|Automatización con IA| C[Características Clave]
+    B -->|Análisis de datos| C
+    B -->|Colaboración en tiempo real| C
+    C -->|Métricas y Reporting| D[Métricas Clave]
+    C -->|Priorización de candidatos| D
+    C -->|Reducción de costos| D
+```
+
 **Problema:**
 - Procesos de contratación ineficientes y desorganizados.
 - Dificultad para colaborar entre reclutadores y managers.
@@ -39,16 +53,48 @@ LTI es un **sistema avanzado de seguimiento de candidatos (ATS)** diseñado para
 
 Los casos de uso representan los principales procesos que facilita LTI:
 
-- **Publicación de una oferta de trabajo:** Desde la creación hasta la publicación automática y notificación a candidatos.
-- **Evaluación y selección de candidatos:** Filtros avanzados, IA para priorización y gestión de aprobaciones.
-- **Coordinación de entrevistas y feedback:** Automatización del agendamiento y evaluación de candidatos.
+### Publicación de una oferta de trabajo
+Desde la creación hasta la publicación automática y notificación a candidatos.
 
 ```mermaid
-graph TD;
-    A[Reclutador] -->|Crea oferta| B[Publicación de Oferta]
-    B -->|Revisión IA| C[Optimización Descripción]
-    B -->|Publicación automática| D[Plataformas de Empleo]
-    D -->|Notificación| E[Candidatos]
+usecaseDiagram
+    actor Reclutador
+    participant "Sistema LTI"
+    Reclutador -->> "Sistema LTI": Crear oferta
+    "Sistema LTI" -->> Reclutador: Confirmación
+    "Sistema LTI" -->> "Plataformas de empleo": Publicación automática
+    "Plataformas de empleo" -->> Candidatos: Notificación de oferta
+```
+
+### Evaluación y selección de candidatos
+Filtros avanzados, IA para priorización y gestión de aprobaciones.
+
+```mermaid
+usecaseDiagram
+    actor Reclutador
+    actor Manager
+    participant "Sistema LTI"
+    Reclutador -->> "Sistema LTI": Filtrar candidatos
+    "Sistema LTI" -->> Reclutador: Lista de candidatos priorizados
+    Reclutador -->> Manager: Compartir lista final
+    Manager -->> "Sistema LTI": Aprobar candidato
+```
+
+### Coordinación de entrevistas y feedback
+Automatización del agendamiento y evaluación de candidatos.
+
+```mermaid
+usecaseDiagram
+    actor Reclutador
+    actor Candidato
+    actor Manager
+    participant "Sistema LTI"
+    Reclutador -->> "Sistema LTI": Agendar entrevista
+    "Sistema LTI" -->> Candidato: Enviar invitación
+    Candidato -->> "Sistema LTI": Confirmar disponibilidad
+    "Sistema LTI" -->> Reclutador: Notificación de confirmación
+    Manager -->> "Sistema LTI": Evaluar entrevista
+    "Sistema LTI" -->> Reclutador: Resultado final
 ```
 
 ## 3. Modelo de Datos Mejorado

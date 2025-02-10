@@ -38,3 +38,7 @@ ahora como **experto arquitecto software** quiero que mejores los siguientes apa
 
 # Cuarto prompt
 quiero que añadas diagramas hechos en mermaid para los apartados 2, 3, 4 y 5
+
+
+# Quinto prompt
+en el apartado 2, añade un diagrama de caso de uso por cada uno de los casos de uso que aparecen ese apartado
